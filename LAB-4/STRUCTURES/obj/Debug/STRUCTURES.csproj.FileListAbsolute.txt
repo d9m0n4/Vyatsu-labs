@@ -1,0 +1,10 @@
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\bin\Debug\STRUCTURES.exe.config
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\bin\Debug\STRUCTURES.exe
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\bin\Debug\STRUCTURES.pdb
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\obj\Debug\STRUCTURES.csproj.AssemblyReference.cache
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\obj\Debug\STRUCTURES.Form1.resources
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\obj\Debug\STRUCTURES.Properties.Resources.resources
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\obj\Debug\STRUCTURES.csproj.GenerateResource.cache
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\obj\Debug\STRUCTURES.csproj.CoreCompileInputs.cache
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\obj\Debug\STRUCTURES.exe
+C:\Users\C2h8e\source\repos\remoteRepos\LAB-4\STRUCTURES\obj\Debug\STRUCTURES.pdb
