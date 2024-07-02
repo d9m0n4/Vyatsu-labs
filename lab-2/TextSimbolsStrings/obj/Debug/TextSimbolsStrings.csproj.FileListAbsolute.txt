@@ -1,0 +1,10 @@
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\bin\Debug\TextSimbolsStrings.exe.config
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\bin\Debug\TextSimbolsStrings.exe
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\bin\Debug\TextSimbolsStrings.pdb
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\obj\Debug\TextSimbolsStrings.csproj.AssemblyReference.cache
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\obj\Debug\TextSimbolsStrings.Form1.resources
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\obj\Debug\TextSimbolsStrings.Properties.Resources.resources
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\obj\Debug\TextSimbolsStrings.csproj.GenerateResource.cache
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\obj\Debug\TextSimbolsStrings.csproj.CoreCompileInputs.cache
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\obj\Debug\TextSimbolsStrings.exe
+C:\Users\d9m0n\source\repos\TextSimbolsStrings\TextSimbolsStrings\obj\Debug\TextSimbolsStrings.pdb
