@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Товар</title>
+</head>
+<body>
+    <form th:action="@{'/products/edit'}" method="post" class="form">
+        <input type="hidden" th:field="${product.id}" />
+        <div class="row">
+            <label for="title">Заголовок:</label>
+            <input type="text" id="title" th:field="${product.title}" placeholder="Enter product title" required />
+        </div>
+
+        <div class="row">
+            <label for="price">Цена</label>
+            <input type="number" id="price" th:field="${product.price}" placeholder="Enter product price" step="1" required />
+        </div>
+
+        <div class="row">
+            <button type="submit" class="button">Сохранить изменения</button>
+        </div>
+    </form>
+
+    <a href="/products" class="link">Вернутся</a>
+
+<style>
+    .form {
+        display: flex;
+        gap: 8px;
+        width: 240px;
+        padding: 16px;
+        background-color: antiquewhite;
+        border-radius: 16px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .row {
+        display: flex;
+        gap: 8px;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+    .link {
+        padding: 8px 0;
+    }
+    .button {
+        width: 100%;
+    }
+</style>
+</body>
+</html>
