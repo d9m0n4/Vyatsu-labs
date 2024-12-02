@@ -7,6 +7,7 @@ public class Main {
         Animal[] animals = {
                 new Dog("Бобик"),
                 new Cat("Мурзик"),
+                new Tiger("Тигрр"),
                 new Frog("Ква"),
                 new Newt("Тритон"),
                 new Chameleon("Хамелеон")
@@ -23,5 +24,6 @@ public class Main {
         System.out.println("Всего животных: " + Animal.getAnimalCount());
         System.out.println("Всего собак: " + Dog.getDogCount());
         System.out.println("Всего котов: " + Cat.getCatCount());
+        System.out.println("Всего котов: " + Tiger.getTigerCount());
     }
 }
