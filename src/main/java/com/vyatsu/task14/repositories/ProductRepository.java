@@ -25,12 +25,20 @@ public class ProductRepository {
 	public void init() {
 		products = new ArrayList<>();
 		Random rnd = new Random();
+		String[] categories = {"Smartphone", "Laptop", "Home Appliance", "Tablet", "Smartwatch"};
+		String[] brands = {"Samsung", "Apple", "Sony", "LG", "Xiaomi"};
+
 		for (Long i = 1L; i < 101; i++) {
-			products.add(new Product(i, "Bread" + i, rnd.nextInt(1000), 0));
+			String category = categories[rnd.nextInt(categories.length)];
+			String brand = brands[rnd.nextInt(brands.length)];
+			String title = brand + " " + category + " " + i;
+
+			products.add(new Product(i, title, rnd.nextInt(50000) + 1000, 0, category));
 		}
 	}
 
 	public List<Product> findAll() {
+
 		return products;
 	}
 
@@ -42,7 +50,7 @@ public class ProductRepository {
 		return products.stream().filter(p -> p.getId().equals(id)).findFirst().get();
 	}
 
-	public List<Product> filterProducts(int page, String title, Integer gt, Integer lt)
+	public List<Product> filterProducts(int page, String title, Integer gte, Integer lte)
 	{
 		int from = (page - 1) * pageSize;
 		int to = Math.min(from + pageSize, products.size());
@@ -53,7 +61,7 @@ public class ProductRepository {
 
 		List<Product> paginated = products.subList(from, to);
 
-		if (gt == null && lt == null && (title == null || title.isEmpty())) {
+		if (gte == null && lte == null && (title == null || title.isEmpty())) {
 			return paginated;
 		}
 
@@ -63,12 +71,12 @@ public class ProductRepository {
 			spec = spec.and(ProductSpecification.hasTitle(title));
 		}
 
-		if (gt != null) {
-			spec = spec.and(ProductSpecification.hasPriceGreaterThan(gt));
+		if (gte != null) {
+			spec = spec.and(ProductSpecification.hasPriceGreaterThan(gte));
 		}
 
-		if (lt != null) {
-			spec = spec.and(ProductSpecification.hasPriceLessThan(lt));
+		if (lte != null) {
+			spec = spec.and(ProductSpecification.hasPriceLessThan(lte));
 		}
 
 		return paginated.stream()
@@ -82,6 +90,13 @@ public class ProductRepository {
 	}
 
 	public void save(Product product) {
+		boolean idExists = products.stream()
+				.anyMatch(p -> p.getId().equals(product.getId()));
+
+		if (idExists) {
+			throw new IllegalArgumentException("Продукт с таким ID уже существует: " + product.getId());
+		}
+
 		products.add(product);
 	}
 
@@ -100,8 +115,8 @@ public class ProductRepository {
 	}
 
 	public List<Product> getTop3MostViewedProducts() {
-		// return products;
 		return products.stream()
+				.filter(p -> p.getViewCount() > 0)
 			.sorted((p1, p2) -> Integer.compare(p2.getViewCount(), p1.getViewCount()))
 			.limit(3)
 			.collect(Collectors.toList());

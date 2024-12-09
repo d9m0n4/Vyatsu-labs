@@ -28,11 +28,11 @@ public class ProductsController {
 
 	@GetMapping
 	public String showProductsList(@RequestParam(value = "title", required = false) String title,
-				       @RequestParam(value = "gt", required = false) Integer gt,
-				       @RequestParam(value = "lt", required = false) Integer lt,
+				       @RequestParam(value = "gte", required = false) Integer gte,
+				       @RequestParam(value = "lte", required = false) Integer lte,
 				       @RequestParam(defaultValue = "1", required = false) int page,
 				       Model model) {
-		List<Product> products = productsRepository.filterProducts(page, title, gt, lt);
+		List<Product> products = productsRepository.filterProducts(page, title, gte, lte);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		String fullname = null;
@@ -52,9 +52,10 @@ public class ProductsController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", productsRepository.getTotalPages());
 		model.addAttribute("size", productsRepository.pageSize);
-
 		model.addAttribute("mostViewed", productsRepository.getTop3MostViewedProducts());
-
+		model.addAttribute("title", title);
+		model.addAttribute("gte", gte);
+		model.addAttribute("lte", lte);
 
 		return "products";
 	}

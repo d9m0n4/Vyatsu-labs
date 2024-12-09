@@ -5,12 +5,14 @@ public class Product {
     private String title;
     private int price;
     private int viewCount;
+    private String category;
 
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
@@ -38,13 +40,22 @@ public class Product {
         this.viewCount++;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public Product() {
     }
 
-    public Product(Long id, String title, int price, int viewCount) {
+    public Product(Long id, String title, int price, int viewCount, String category) {
         this.id = id;
         this.title = title;
         this.price = price;
-	this.viewCount = viewCount;
+	    this.viewCount = viewCount;
+        this.category = category;
     }
 }
