@@ -1,9 +1,14 @@
 package ru.vyatsu.animals;
 
 public abstract class Amphibian extends Animal {
-    public Amphibian(String name) {
+    protected String uniqueness;
+
+    public Amphibian(String name, String uniqueness) {
         super(name);
+        this.uniqueness = uniqueness;
     }
 
-    public abstract void uniqueness();
+    public void uniqueness(){
+        System.out.println(name + ": " + uniqueness);
+    }
 }

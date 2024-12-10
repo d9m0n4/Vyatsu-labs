@@ -1,8 +1,10 @@
 package ru.vyatsu.animals;
 
 public class Frog extends Amphibian{
-    public Frog(String name) {
-        super(name);
+    public static int frogCount = 0;
+    public Frog(String name, String uniqueness) {
+        super(name, uniqueness);
+        frogCount++;
     }
     @Override
     public void run(int distance) {
@@ -14,8 +16,8 @@ public class Frog extends Amphibian{
         System.out.println(name + " проплыл(а) " + distance + " м.");
     }
 
-    @Override
-    public void uniqueness() {
-        System.out.println(name + " умеет прыгать на большие расстояния.");
+
+    public static int getFrogCount() {
+        return frogCount;
     }
 }

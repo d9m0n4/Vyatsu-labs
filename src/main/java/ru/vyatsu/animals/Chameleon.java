@@ -1,8 +1,10 @@
 package ru.vyatsu.animals;
 
 public class Chameleon extends Amphibian{
-    public Chameleon(String name) {
-        super(name);
+    public static int chameleonCount = 0;
+    public Chameleon(String name, String uniqueness) {
+        super(name, uniqueness);
+        chameleonCount++;
     }
 
     @Override
@@ -15,9 +17,8 @@ public class Chameleon extends Amphibian{
         System.out.println(name + " не умеет плавать.");
     }
 
-    @Override
-    public void uniqueness() {
-        System.out.println(name + " может менять цвет кожи.");
+    public static int getChameleonCount() {
+        return chameleonCount;
     }
 
 

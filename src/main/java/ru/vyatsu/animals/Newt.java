@@ -1,8 +1,11 @@
 package ru.vyatsu.animals;
 
 public class Newt extends Amphibian{
-    public Newt(String name) {
-        super(name);
+    private static int newtCount = 0;
+
+    public Newt(String name, String uniqueness) {
+        super(name, uniqueness);
+        newtCount++;
     }
 
     @Override
@@ -15,8 +18,8 @@ public class Newt extends Amphibian{
         System.out.println(name + " проплыл(а) " + distance + " м.");
     }
 
-    @Override
-    public void uniqueness() {
-        System.out.println(name + " может восстанавливать утраченные конечности.");
+
+    public static int getNewtCount() {
+        return newtCount;
     }
 }
