@@ -1,6 +1,7 @@
 package com.vyatsu.task14.repositories;
 
 import com.vyatsu.task14.entities.Product;
+import com.vyatsu.task14.exceptions.ProductAlreadyExistsException;
 import org.springframework.stereotype.Component;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -50,39 +51,37 @@ public class ProductRepository {
 		return products.stream().filter(p -> p.getId().equals(id)).findFirst().get();
 	}
 
-	public List<Product> filterProducts(int page, String title, Integer gte, Integer lte)
-	{
-		int from = (page - 1) * pageSize;
-		int to = Math.min(from + pageSize, products.size());
-
-		if (from > products.size()) {
-			return List.of();
-		}
-
-		List<Product> paginated = products.subList(from, to);
-
-		if (gte == null && lte == null && (title == null || title.isEmpty())) {
-			return paginated;
-		}
-
+	public List<Product> filterProducts(int page, String title, Integer gte, Integer lte) {
+		// Создание спецификации для фильтрации
 		ListSpecification<Product> spec = ListSpecification.all();
 
 		if (title != null && !title.isEmpty()) {
 			spec = spec.and(ProductSpecification.hasTitle(title));
 		}
-
 		if (gte != null) {
 			spec = spec.and(ProductSpecification.hasPriceGreaterThan(gte));
 		}
-
 		if (lte != null) {
 			spec = spec.and(ProductSpecification.hasPriceLessThan(lte));
 		}
 
-		return paginated.stream()
-			.filter(spec::isSatisfiedBy)
-			.collect(Collectors.toList());
+		// Фильтрация по спецификациям
+		List<Product> filtered = products.stream()
+				.filter(spec::isSatisfiedBy)
+				.collect(Collectors.toList());
+
+		// Пагинация
+		int from = (page - 1) * pageSize;
+		int to = Math.min(from + pageSize, filtered.size());
+
+		if (from > filtered.size()) {
+			return List.of();
+		}
+
+		return filtered.subList(from, to);
 	}
+
+
 
 	public int getTotalPages()
 	{
@@ -94,11 +93,12 @@ public class ProductRepository {
 				.anyMatch(p -> p.getId().equals(product.getId()));
 
 		if (idExists) {
-			throw new IllegalArgumentException("Продукт с таким ID уже существует: " + product.getId());
+			throw new ProductAlreadyExistsException("Продукт с таким ID уже существует: " + product.getId());
 		}
 
 		products.add(product);
 	}
+
 
 	public void delete(Long id) {
 		products.stream().filter(p -> p.getId().equals(id)).findFirst().ifPresent(products::remove);

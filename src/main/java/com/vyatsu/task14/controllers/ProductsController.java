@@ -1,6 +1,7 @@
 package com.vyatsu.task14.controllers;
 
 import com.vyatsu.task14.entities.Product;
+import com.vyatsu.task14.exceptions.ProductAlreadyExistsException;
 import com.vyatsu.task14.repositories.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,5 +105,11 @@ public class ProductsController {
 	public String deleteProduct(Model model, @PathVariable(value = "id") Long id) {
 		productsRepository.delete(id);
 		return "redirect:/products";
+	}
+
+	@ExceptionHandler(ProductAlreadyExistsException.class)
+	public String handleProductAlreadyExistsException(ProductAlreadyExistsException ex, Model model) {
+		model.addAttribute("errorMessage", ex.getMessage());
+		return "error-page";
 	}
 }
