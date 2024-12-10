@@ -1,6 +1,8 @@
 package ru.vyatsu;
 
-import ru.vyatsu.participants.*;
+import ru.vyatsu.participants.Human;
+import ru.vyatsu.participants.Robot;
+import ru.vyatsu.participants.Cat;
 import ru.vyatsu.obstacles.*;
 import ru.vyatsu.interfaces.Runnable;
 import ru.vyatsu.interfaces.Jumpable;

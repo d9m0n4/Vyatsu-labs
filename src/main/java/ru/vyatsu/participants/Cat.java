@@ -6,7 +6,9 @@ public class Cat implements Runnable, Jumpable {
     private String name;
     private int maxRunDistance;
     private int maxJumpHeight;
-    private static int superJumpUsesLeft = 2;
+    private static int superJumpCount = 2;
+
+
 
     public Cat(String name, int maxRunDistance, int maxJumpHeight) {
         this.name = name;
@@ -30,14 +32,19 @@ public class Cat implements Runnable, Jumpable {
         if (height <= maxJumpHeight) {
             System.out.println(name + " успешно прыгнул на высоту " + height + " м.");
             return true;
-        } else if (superJumpUsesLeft > 0) {
-            superJumpUsesLeft--;
-            System.out.println(name + " использовал superJump и преодолел высоту " + height + " м! Осталось суперпрыжков: " + superJumpUsesLeft);
+        } else if (superJumpCount > 0) {
+            superJumpCount--;
+            System.out.println(name + " использовал superJump и преодолел высоту " + height + " м! Осталось суперпрыжков: " + superJumpCount);
             return true;
         } else {
-            System.out.println(name + " не смог прыгнуть на высоту " + height + " м. SuperJump больше недоступен.");
+            System.out.println(name + "не смог прыгнуть на высоту "  + height + "м. попытался использовать SuperJump" + " SuperJump больше недоступен.");
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
 

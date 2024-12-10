@@ -34,5 +34,10 @@ public class Robot implements Runnable, Jumpable {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 
