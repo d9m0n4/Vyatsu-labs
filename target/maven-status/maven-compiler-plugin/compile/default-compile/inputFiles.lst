@@ -1,0 +1,12 @@
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/controllers/Cat.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/repositories/ProductRepository.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/DemoBootApplication.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/configuration/AppConfig.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/configuration/SecurityWebApplicationInitializer.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/repositories/specification/ProductSpecification.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/configuration/SecurityConfig.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/repositories/specification/ListSpecification.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/controllers/ProductsController.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/entities/Product.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/exceptions/ProductAlreadyExistsException.java
+/Users/D9m0n/Desktop/Универ/JAVA/3 работа/task14/src/main/java/com/vyatsu/task14/controllers/MainController.java

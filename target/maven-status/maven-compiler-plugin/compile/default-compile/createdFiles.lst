@@ -1,0 +1,11 @@
+com/vyatsu/task14/exceptions/ProductAlreadyExistsException.class
+com/vyatsu/task14/entities/Product.class
+com/vyatsu/task14/controllers/Cat.class
+com/vyatsu/task14/repositories/specification/ProductSpecification.class
+com/vyatsu/task14/configuration/SecurityConfig.class
+com/vyatsu/task14/controllers/MainController.class
+com/vyatsu/task14/DemoBootApplication.class
+com/vyatsu/task14/configuration/AppConfig.class
+com/vyatsu/task14/repositories/specification/ListSpecification.class
+com/vyatsu/task14/controllers/ProductsController.class
+com/vyatsu/task14/repositories/ProductRepository.class
