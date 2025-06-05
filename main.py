@@ -4,10 +4,11 @@ from datetime import datetime
 from abc import ABC, abstractmethod
 from statistics import median
 from collections import defaultdict
+import sqlite3
 
 class Measurement(ABC):
     def __init__(self, timestamp, sensor_id, reading_id, value):
-        self.timestamp = timestamp  # строка
+        self.timestamp = timestamp
         self.sensor_id = sensor_id
         self.reading_id = reading_id
         self.value = value
@@ -41,25 +42,35 @@ class MeasurementApp:
         self.root = root
         self.root.title("Показания приборов")
 
+        # Подключение к базе данных
+        self.conn = sqlite3.connect("measurements.db")
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS readings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                type TEXT NOT NULL,
+                timestamp TEXT NOT NULL,
+                sensor_id TEXT NOT NULL,
+                reading_id TEXT NOT NULL,
+                value REAL NOT NULL
+            )
+        """)
+        self.conn.commit()
+
         self.measurements = []
 
         columns = ("Тип", "Дата и время", "Номер датчика", "Номер измерения", "Значение")
         self.tree = ttk.Treeview(root, columns=columns, show="headings")
-
         for col in columns:
             self.tree.heading(col, text=col)
             self.tree.column(col, anchor="center", width=140)
-
         self.tree.pack(fill=tk.BOTH, expand=True)
 
-        # Панель кнопок
         btn_frame = tk.Frame(root)
         btn_frame.pack(pady=10)
-
         tk.Button(btn_frame, text="Добавить термометр", command=self.add_thermometer).pack(side=tk.LEFT, padx=5)
         tk.Button(btn_frame, text="Добавить барометр", command=self.add_barometer).pack(side=tk.LEFT, padx=5)
 
-        # Фильтрация по дате
         filter_frame = tk.Frame(root)
         filter_frame.pack(pady=10)
 
@@ -74,8 +85,23 @@ class MeasurementApp:
         tk.Button(filter_frame, text="Фильтровать", command=self.filter_by_date).pack(side=tk.LEFT, padx=5)
         tk.Button(filter_frame, text="Медиана по дням", command=self.show_median_by_day).pack(side=tk.LEFT, padx=5)
 
+        self.load_measurements_from_db()
+
+    def load_measurements_from_db(self):
+        self.cursor.execute("SELECT type, timestamp, sensor_id, reading_id, value FROM readings")
+        for row in self.cursor.fetchall():
+            typ, timestamp, sensor_id, reading_id, value = row
+            obj = ThermometerReading(timestamp, sensor_id, reading_id, value) if typ == "Термометр" else BarometerReading(timestamp, sensor_id, reading_id, value)
+            self.measurements.append(obj)
+            self.tree.insert("", tk.END, values=obj.to_tuple())
+
     def add_measurement(self, measurement):
         self.measurements.append(measurement)
+        self.cursor.execute("""
+            INSERT INTO readings (type, timestamp, sensor_id, reading_id, value)
+            VALUES (?, ?, ?, ?, ?)
+        """, measurement.to_tuple())
+        self.conn.commit()
         self.tree.insert("", tk.END, values=measurement.to_tuple())
 
     def add_thermometer(self):
@@ -99,7 +125,6 @@ class MeasurementApp:
     def filter_by_date(self):
         start_str = self.start_entry.get()
         end_str = self.end_entry.get()
-
         try:
             start_date = datetime.strptime(start_str, "%Y-%m-%d").date()
             end_date = datetime.strptime(end_str, "%Y-%m-%d").date()
@@ -116,7 +141,6 @@ class MeasurementApp:
     def show_median_by_day(self):
         start_str = self.start_entry.get()
         end_str = self.end_entry.get()
-
         try:
             start_date = datetime.strptime(start_str, "%Y-%m-%d").date()
             end_date = datetime.strptime(end_str, "%Y-%m-%d").date()
@@ -134,7 +158,6 @@ class MeasurementApp:
             messagebox.showinfo("Результат", "Нет данных в выбранный период.")
             return
 
-        # Создаём окно с результатом
         result_window = tk.Toplevel(self.root)
         result_window.title("Медианные значения по дням")
 
@@ -142,6 +165,9 @@ class MeasurementApp:
             med = median(values)
             label = tk.Label(result_window, text=f"{day}: {med}")
             label.pack()
+
+    def __del__(self):
+        self.conn.close()
 
 if __name__ == "__main__":
     root = tk.Tk()
