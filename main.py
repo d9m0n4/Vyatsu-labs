@@ -84,6 +84,7 @@ class MeasurementApp:
 
         tk.Button(filter_frame, text="Фильтровать", command=self.filter_by_date).pack(side=tk.LEFT, padx=5)
         tk.Button(filter_frame, text="Медиана по дням", command=self.show_median_by_day).pack(side=tk.LEFT, padx=5)
+        tk.Button(filter_frame, text="Сбросить фильтр", command=self.reset_filter).pack(side=tk.LEFT, padx=5)
 
         self.load_measurements_from_db()
 
@@ -138,6 +139,13 @@ class MeasurementApp:
             if start_date <= m.get_date() <= end_date:
                 self.tree.insert("", tk.END, values=m.to_tuple())
 
+    def reset_filter(self):
+        self.start_entry.delete(0, tk.END)
+        self.end_entry.delete(0, tk.END)
+        self.tree.delete(*self.tree.get_children())
+        for m in self.measurements:
+            self.tree.insert("", tk.END, values=m.to_tuple())
+
     def show_median_by_day(self):
         start_str = self.start_entry.get()
         end_str = self.end_entry.get()
@@ -163,11 +171,12 @@ class MeasurementApp:
 
         for day, values in sorted(daily_values.items()):
             med = median(values)
-            label = tk.Label(result_window, text=f"{day}: {med}")
+            label = tk.Label(result_window, text=f"{day}: {round(med, 2)}")
             label.pack()
 
     def __del__(self):
         self.conn.close()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
